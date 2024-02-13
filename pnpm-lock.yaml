@@ -116,6 +116,9 @@ dependencies:
   '@tiptap/extension-task-list':
     specifier: ^2.2.2
     version: 2.2.2(@tiptap/core@2.2.2)
+  '@tiptap/extension-text':
+    specifier: ^2.2.2
+    version: 2.2.2(@tiptap/core@2.2.2)
   '@tiptap/extension-text-align':
     specifier: ^2.2.2
     version: 2.2.2(@tiptap/core@2.2.2)
@@ -143,6 +146,9 @@ dependencies:
   highlight.js:
     specifier: ^11.9.0
     version: 11.9.0
+  lowlight:
+    specifier: ^3.1.0
+    version: 3.1.0
   prop-types:
     specifier: ^15.8.1
     version: 15.8.1
@@ -163,7 +169,7 @@ dependencies:
     version: 2.0.0(react-dom@18.2.0)(react@18.2.0)
   react-scripts:
     specifier: ^5.0.1
-    version: 5.0.1(@babel/plugin-syntax-flow@7.23.3)(@babel/plugin-transform-react-jsx@7.23.4)(eslint@8.56.0)(react@18.2.0)(typescript@5.3.3)
+    version: 5.0.1(@babel/plugin-syntax-flow@7.23.3)(@babel/plugin-transform-react-jsx@7.23.4)(eslint@8.56.0)(react@18.2.0)(sass@1.70.0)(typescript@5.3.3)
   react-transition-group:
     specifier: ^4.4.5
     version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
@@ -205,6 +211,9 @@ devDependencies:
   postcss:
     specifier: ^8.4.35
     version: 8.4.35
+  sass:
+    specifier: ^1.70.0
+    version: 1.70.0
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
@@ -213,7 +222,7 @@ devDependencies:
     version: 5.3.3
   vite:
     specifier: ^5.0.8
-    version: 5.0.12
+    version: 5.0.12(sass@1.70.0)
 
 packages:
 
@@ -4128,6 +4137,12 @@ packages:
     dependencies:
       '@types/node': 20.11.14
 
+  /@types/hast@3.0.4:
+    resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
+    dependencies:
+      '@types/unist': 3.0.2
+    dev: false
+
   /@types/html-minifier-terser@6.1.0:
     resolution: {integrity: sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==}
     dev: false
@@ -4616,7 +4631,7 @@ packages:
       vite: ^4 || ^5
     dependencies:
       '@swc/core': 1.3.107
-      vite: 5.0.12
+      vite: 5.0.12(sass@1.70.0)
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -7665,6 +7680,9 @@ packages:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
     dev: false
 
+  /immutable@4.3.5:
+    resolution: {integrity: sha512-8eabxkth9gZatlwl5TBuJnCsoTADlL6ftEr7A4qgdaTsPyreilDSnUk57SO+jfKcNtxPa22U5KK6DSeAYhpBJw==}
+
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -9318,6 +9336,14 @@ packages:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /lowlight@3.1.0:
+    resolution: {integrity: sha512-CEbNVoSikAxwDMDPjXlqlFYiZLkDJHwyGu/MfOsJnF3d7f3tds5J3z8s/l9TMXhzfsJCCJEAsD78842mwmg0PQ==}
+    dependencies:
+      '@types/hast': 3.0.4
+      devlop: 1.1.0
+      highlight.js: 11.9.0
     dev: false
 
   /lru-cache@10.2.0:
@@ -11322,7 +11348,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /react-scripts@5.0.1(@babel/plugin-syntax-flow@7.23.3)(@babel/plugin-transform-react-jsx@7.23.4)(eslint@8.56.0)(react@18.2.0)(typescript@5.3.3):
+  /react-scripts@5.0.1(@babel/plugin-syntax-flow@7.23.3)(@babel/plugin-transform-react-jsx@7.23.4)(eslint@8.56.0)(react@18.2.0)(sass@1.70.0)(typescript@5.3.3):
     resolution: {integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -11372,7 +11398,7 @@ packages:
       react-refresh: 0.11.0
       resolve: 1.22.8
       resolve-url-loader: 4.0.0
-      sass-loader: 12.6.0(webpack@5.90.0)
+      sass-loader: 12.6.0(sass@1.70.0)(webpack@5.90.0)
       semver: 7.5.4
       source-map-loader: 3.0.2(webpack@5.90.0)
       style-loader: 3.3.4(webpack@5.90.0)
@@ -11778,7 +11804,7 @@ packages:
     resolution: {integrity: sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==}
     dev: false
 
-  /sass-loader@12.6.0(webpack@5.90.0):
+  /sass-loader@12.6.0(sass@1.70.0)(webpack@5.90.0):
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -11799,8 +11825,18 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
+      sass: 1.70.0
       webpack: 5.90.0
     dev: false
+
+  /sass@1.70.0:
+    resolution: {integrity: sha512-uUxNQ3zAHeAx5nRFskBnrWzDUJrrvpCPD5FNAoRvTi0WwremlheES3tg+56PaVtCs5QDRX5CBLxxKMDJMEa1WQ==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.3.5
+      source-map-js: 1.0.2
 
   /sax@1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
@@ -12893,7 +12929,7 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
-  /vite@5.0.12:
+  /vite@5.0.12(sass@1.70.0):
     resolution: {integrity: sha512-4hsnEkG3q0N4Tzf1+t6NdN9dg/L3BM+q8SWgbSPnJvrgH2kgdyzfVJwbR1ic69/4uMJJ/3dqDZZE5/WwqW8U1w==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -12924,6 +12960,7 @@ packages:
       esbuild: 0.19.12
       postcss: 8.4.35
       rollup: 4.9.6
+      sass: 1.70.0
     optionalDependencies:
       fsevents: 2.3.3
     dev: true

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import "./App.css";
@@ -10,21 +10,77 @@ import hljs from "highlight.js";
 // https://www.libhunt.com/l/typescript/topic/wysiwyg
 // https://www.reddit.com/r/laravel/comments/105s2dl/wysiwyg_markdown_editor/
 
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import Document from "@tiptap/extension-document";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
+import { ReactNodeViewRenderer } from "@tiptap/react";
+import css from "highlight.js/lib/languages/css";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
+import html from "highlight.js/lib/languages/xml";
+
 import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+
+import { createLowlight } from "lowlight";
+import CodeBlockComponent from "./CodeBlockComponent";
+
+import "./styles.scss";
+
+const MenuBar = ({ editor }: { editor: any }) => {
+  if (!editor) {
+    return null;
+  }
+
+  return (
+    <button
+      onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+      className={editor.isActive("codeBlock") ? "is-active" : ""}
+    >
+      code block
+    </button>
+  );
+};
+
+const lowlight = createLowlight({});
+lowlight.register({ html, css, js, ts });
 
 function App() {
   const [activeQuill, setActiveQuill] = useState<number>(0);
 
   // tiptap
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      Document,
+      Paragraph,
+      Text,
+      CodeBlockLowlight.extend({
+        addNodeView() {
+          return ReactNodeViewRenderer(CodeBlockComponent);
+        },
+      }).configure({ lowlight }),
+    ],
     content: `
-      <p>
-        Hey, try to select some text here. There will popup a menu for selecting some inline styles. Remember: you have full control about content and styling of this menu.
-      </p>
-    `,
-  });
+        <p>
+          That’s a boring paragraph followed by a fenced code block:
+        </p>
+        <pre><code class="language-javascript">for (var i=1; i <= 20; i++)
+{
+  if (i % 15 == 0)
+    console.log("FizzBuzz");
+  else if (i % 3 == 0)
+    console.log("Fizz");
+  else if (i % 5 == 0)
+    console.log("Buzz");
+  else
+    console.log(i);
+}</code></pre>
+        <p>
+          Press Command/Ctrl + Enter to leave the fenced code block and continue typing in boring paragraphs.
+        </p>
+      `,
+  })
 
   // quill
   const [data, setData] = useState<string>("");
@@ -87,29 +143,10 @@ function App() {
 
       {activeQuill === 1 && (
         <>
-          {editor && (
-            <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-              <button
-                onClick={() => editor.chain().focus().toggleBold().run()}
-                className={editor.isActive("bold") ? "is-active" : ""}
-              >
-                bold
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleItalic().run()}
-                className={editor.isActive("italic") ? "is-active" : ""}
-              >
-                italic
-              </button>
-              <button
-                onClick={() => editor.chain().focus().toggleStrike().run()}
-                className={editor.isActive("strike") ? "is-active" : ""}
-              >
-                strike
-              </button>
-            </BubbleMenu>
-          )}
-          <EditorContent editor={editor}/>
+          <div className="tw-w-[36rem]">
+            <MenuBar editor={editor} />
+            <EditorContent editor={editor} />
+          </div>
         </>
       )}
     </div>
