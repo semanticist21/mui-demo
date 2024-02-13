@@ -18,8 +18,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@mui-internal/*": ["./src/mui-internal/*"],
+      "@/* ": ["./src/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts*"],
+  "exclude": ["node_modules", "dist", "lib"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
