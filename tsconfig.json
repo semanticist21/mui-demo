@@ -22,9 +22,9 @@
     "paths": {
       "@mui-internal/*": ["./src/mui-internal/*"],
       "@/* ": ["./src/*"]
-    }
+    },
   },
   "include": ["src/**/*.ts*"],
-  "exclude": ["node_modules", "dist", "lib"],
+  "exclude": ["node_modules", "src/dist", "lib"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

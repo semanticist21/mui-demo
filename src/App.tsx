@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import "./App.css";
@@ -27,6 +27,8 @@ import { createLowlight } from "lowlight";
 import CodeBlockComponent from "./CodeBlockComponent";
 
 import "./styles.scss";
+import KkomEditor from "./dist/mjs/lib";
+import { Example } from "./components/accordion/Example.tsx";
 
 const MenuBar = ({ editor }: { editor: any }) => {
   if (!editor) {
@@ -80,7 +82,7 @@ function App() {
           Press Command/Ctrl + Enter to leave the fenced code block and continue typing in boring paragraphs.
         </p>
       `,
-  })
+  });
 
   // quill
   const [data, setData] = useState<string>("");
@@ -122,6 +124,7 @@ function App() {
 
   return (
     <div className="tw-bg-white tw-w-[50rem] tw-h-[60rem] tw-relative">
+      <KkomEditor />
       <button
         className="tw-absolute tw-w-40 tw-flex tw-items-center tw-justify-center tw-h-8 tw-black tw-z-10 -tw-left-[20rem] tw-bg-red-500 tw-rounded-lg"
         onClick={() => setActiveQuill(activeQuill !== 1 ? activeQuill + 1 : 0)}
@@ -129,16 +132,19 @@ function App() {
         바꿔바꿔
       </button>
       {activeQuill === 0 && (
-        <ReactQuill
-          className="tw-h-[calc(100%-40px)] tw-pb-0 tw-text-black"
-          theme="snow"
-          modules={modules}
-          value={data}
-          onChange={(input, delta, source, editor) => {
-            console.log(input);
-            setData(input);
-          }}
-        />
+        <Fragment>
+          <Example />
+          <ReactQuill
+            className="tw-h-[calc(100%-40px)] tw-pb-0 tw-text-black"
+            theme="snow"
+            modules={modules}
+            value={data}
+            onChange={(input, delta, source, editor) => {
+              console.log(input);
+              setData(input);
+            }}
+          />
+        </Fragment>
       )}
 
       {activeQuill === 1 && (
