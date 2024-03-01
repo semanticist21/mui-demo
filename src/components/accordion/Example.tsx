@@ -1,11 +1,10 @@
-import useInputHandle from "../simple-input";
+import useInputHandle from "@kkomjang/react-simple-input";
 
 export const Example = () => {
   // declaration
   const { values, setValues, matching, handlers, keys } = useInputHandle({
     strings: ["name", "password"],
     booleans: ["isAgreed"],
-    numbers: ["views"],
   });
 
   // handleString - function to handle string input change
@@ -21,7 +20,7 @@ export const Example = () => {
   console.log(values.name);
   console.log(values.password);
   console.log(values.isAgreed);
-  console.log(values.views);
+  console.log(numberKeys);
 
   return (
     <div>
